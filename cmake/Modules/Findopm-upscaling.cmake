@@ -23,7 +23,7 @@ find_opm_package (
   "opm/upscaling/SinglePhaseUpscaler.hpp"
 
   # library to search for
-  "opmupscaling"
+  "opmcore"
 
   # defines to be added to compilations
   ""

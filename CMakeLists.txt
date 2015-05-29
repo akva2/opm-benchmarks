@@ -45,7 +45,7 @@ else()
       message( " |    1. Clone the repository: git clone git@github.com:OPM/opm-cmake.git        |")
       message( " |                                                                               |")
       message( " |    2. Run cmake in the current project with -DOPM_CMAKE_ROOT=<path>/opm-cmake |")
-      message( " |                                                                               |") 
+      message( " |                                                                               |")
       message( " \\-------------------------------------------------------------------------------/")
       message( "" )
       message( FATAL_ERROR "Could not find OPM Macros")
@@ -87,6 +87,14 @@ endmacro (tests_hook)
 
 # all setup common to the OPM library modules is done here
 include (OpmLibMain)
+
+# Setup static targets
+include(OpmStaticTargets)
+
+from_git(https://github.com/OPM/opm-benchmarks opm-benchmarks ${OPM_BENCHMARK_VERSION})
+add_dependencies(opm-benchmarks-static opm-upscaling-static)
+add_custom_target(static-benchmarks)
+add_dependencies(static-benchmarks opm-benchmarks-static)
 
 # encode test cases so they can be embedded in the executable
 include (${PROJECT_SOURCE_DIR}/EmbedCases.cmake)
